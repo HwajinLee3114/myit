@@ -1,7 +1,7 @@
-import "./App.css";
-
 function App() {
-  return <div className="App"></div>;
+  return (
+    <main className="App min-h-screen h-full w-full flex flex-col p-3 items-center justify-center"></main>
+  );
 }
 
 export default App;
