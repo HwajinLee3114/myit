@@ -7,8 +7,6 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
-  console.log(todos);
-
   const sortedTodos = todos.sort((a, b) => {
     const timeA = a.time ? a.time.split(":").map(Number) : [Infinity, Infinity];
     const timeB = b.time ? b.time.split(":").map(Number) : [Infinity, Infinity];
