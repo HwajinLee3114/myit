@@ -13,7 +13,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     >
       <span className="text-xl">{todo.emoji}</span>
       <div className="flex gap-2 w-full justify-between items-center">
-        <div className="text-md break-words max-w-[330px] text-left">
+        <div className="text-md break-words max-w-[250px] text-left">
           {todo.task}
         </div>
         <div className="text-sm text-gray-500">{todo.time}</div>
