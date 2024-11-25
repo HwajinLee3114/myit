@@ -1,27 +1,5 @@
 import React, { useState } from "react";
-
-const emojiList: string[] = [
-  "😊",
-  "😂",
-  "😍",
-  "😎",
-  "🥺",
-  "🙃",
-  "😜",
-  "💀",
-  "👍",
-  "👑",
-  "🌈",
-  "🔥",
-  "🍕",
-  "🍔",
-  "🍩",
-  "🍎",
-  "🥑",
-  "🌻",
-  "⚽",
-  "🎉",
-];
+import { emojiList } from "../../data/emoji";
 
 interface EmojiPickerProps {
   value: string;
@@ -32,7 +10,7 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ value, onChange }) => {
   const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
 
   const handleEmojiClick = (emoji: string): void => {
-    onChange(value + emoji);
+    onChange(emoji);
     setIsPickerOpen(false);
   };
 
@@ -40,27 +18,18 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ value, onChange }) => {
     setIsPickerOpen((prev) => !prev);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    onChange(e.target.value);
-  };
-
   return (
-    <div className="relative">
-      <input
-        type="text"
-        value={value}
-        onChange={handleInputChange}
-        placeholder="Enter text or select emoji"
-        className="border p-2 w-full"
-      />
-
-      <button onClick={toggleEmojiPicker} className="absolute right-2 top-2">
-        😊
+    <div className="relative inline-block w-fit">
+      <button
+        onClick={toggleEmojiPicker}
+        className="w-15 h-15 border-dotted border-4 text-gray-500 text-3xl rounded-full px-3 py-2"
+      >
+        {value ? value : "✚"}
       </button>
 
       {isPickerOpen && (
-        <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg p-2">
-          <div className="grid grid-cols-5 gap-2">
+        <div className="absolute mt-2 bg-white border rounded shadow-lg p-2">
+          <div className="grid grid-cols-5 gap-2 w-[170px]">
             {emojiList.map((emoji, index) => (
               <button
                 key={index}

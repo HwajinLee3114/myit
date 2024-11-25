@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Todo } from "../../types/todo";
 import { TextField } from "../common/TextField";
 import EmojiPicker from "../common/EmojiPicker";
+import ColorPicker from "../common/ColorPicker";
 
 interface AddTodoProps {
   onAdd: (todo: Todo) => void;
@@ -11,9 +12,9 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   const [task, setTask] = useState("");
   const [emoji, setEmoji] = useState("");
   const [time, setTime] = useState("");
-  const [withWho, setWithWho] = useState("");
-  const [loc, setLoc] = useState("");
   const [bgColor, setBgColor] = useState("bg-white");
+  // const [withWho, setWithWho] = useState("");
+  // const [loc, setLoc] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,16 +23,24 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
       task,
       emoji,
       time,
-      withWho,
-      loc,
+      // withWho,
+      // loc,
       bgColor,
     };
+
+    if (!newTodo.task) {
+      // alert("일정을 입력해 주세요.");
+      return false;
+    }
+
+    console.info(newTodo);
+
     onAdd(newTodo);
     setTask("");
     setEmoji("");
     setTime("");
-    setWithWho("");
-    setLoc("");
+    // setWithWho("");
+    // setLoc("");
     setBgColor("bg-white");
   };
 
@@ -39,26 +48,37 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
     setEmoji(changeEmoji);
   };
 
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 p-4 border rounded-lg shadow-md"
-    >
-      <TextField
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="일정을 입력해 주세요."
-      />
+  const colorChangeHandler = (changeColor: string): void => {
+    setBgColor(changeColor);
+  };
 
-      <EmojiPicker value={emoji} onChange={emojiChangeHandler} />
-      
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit(e as unknown as React.FormEvent);
+    }
+  };
+
+  return (
+    <div className="space-y-4 p-4 border rounded-lg shadow-md w-96">
+      <div className="flex gap-2">
+        <EmojiPicker value={emoji} onChange={emojiChangeHandler} />
+        <ColorPicker value={bgColor} onChange={colorChangeHandler} />
+
+        <TextField
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="일정을 입력해 주세요."
+          onKeyDown={keyDownHandler}
+        />
+      </div>
+
       <input
         type="time"
         value={time}
         onChange={(e) => setTime(e.target.value)}
         className="w-full p-2 border rounded"
       />
-      <TextField
+      {/* <TextField
         value={withWho}
         onChange={(e) => setWithWho(e.target.value)}
         placeholder="누구랑"
@@ -67,20 +87,14 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
         value={loc}
         onChange={(e) => setLoc(e.target.value)}
         placeholder="장소를 입력해 주세요."
-      />
-      <input
-        type="color"
-        value={bgColor}
-        onChange={(e) => setBgColor(e.target.value)}
-        className="w-full p-2 border rounded"
-      />
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white p-2 rounded"
-      >
-        Add Todo
-      </button>
-    </form>
+      /> */}
+
+      {/* <PostItButton
+        btnType="submit"
+        text="Add Todo"
+        className="bg-blue-500 text-white"
+      /> */}
+    </div>
   );
 };
 

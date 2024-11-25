@@ -18,7 +18,7 @@ export const TodoPage = () => {
       <h1 className="text-2xl font-bold mb-4">{today.toLocaleDateString()}</h1>
       <AddTodo onAdd={handleAddTodo} />
       <TodoList todos={todos} />
-      <ExportButton targetId="todo-list" />
+      {todos && todos.length > 0 && <ExportButton targetId="todo-list" />}
     </div>
   );
 };

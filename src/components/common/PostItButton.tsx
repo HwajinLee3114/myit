@@ -6,6 +6,7 @@ export const PostItButton: React.FC<ButtonProps> = ({
   text,
   className,
   onclick,
+  btnType = "button",
   to,
 }) => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const PostItButton: React.FC<ButtonProps> = ({
   };
   return (
     <button
+      type={btnType}
       className={`cursor-pointer px-4 py-7 rounded-md shadow-md text-gray-800 ${className} 
       hover:shadow-lg transform hover:scale-105 transition-all duration-300`}
       onClick={clickHandler}

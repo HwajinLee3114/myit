@@ -5,6 +5,7 @@ interface TextFieldProps {
   placeholder?: string;
   className?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 export const TextField = ({
@@ -12,6 +13,7 @@ export const TextField = ({
   placeholder,
   className,
   onChange,
+  onKeyDown,
 }: TextFieldProps) => {
   return (
     <input
@@ -20,6 +22,7 @@ export const TextField = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   );
 };
