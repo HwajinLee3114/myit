@@ -10,7 +10,12 @@ const ExportButton: React.FC<ExportButtonProps> = ({ targetId }) => {
   const handleExport = () => {
     const element = document.getElementById(targetId);
     if (element) {
-      html2canvas(element).then((canvas) => {
+      const fixedWidth = 350;
+
+      html2canvas(element, {
+        width: fixedWidth,
+        scale: fixedWidth / element.offsetWidth,
+      }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
         const link = document.createElement("a");
         link.href = img;

@@ -60,7 +60,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   };
 
   return (
-    <div className="space-y-4 p-4 border rounded-lg shadow-md w-full md:w-96">
+    <div className="space-y-4 p-4 border rounded-lg shadow-md w-full sm:w-96">
       <div className="flex gap-2">
         <EmojiPicker value={emoji} onChange={emojiChangeHandler} />
         <ColorPicker value={bgColor} onChange={colorChangeHandler} />
