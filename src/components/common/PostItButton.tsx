@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 export const PostItButton: React.FC<ButtonProps> = ({
   text,
   className,
-  onclick,
+  onClick,
   btnType = "button",
   to,
 }) => {
   const navigate = useNavigate();
-  const clickHandler = () => {
+  const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (to) {
       navigate(to);
+    } else if (onClick) {
+      onClick(event);
     }
   };
   return (

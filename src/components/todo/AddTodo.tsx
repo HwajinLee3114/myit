@@ -3,6 +3,7 @@ import { Todo } from "../../types/todo";
 import { TextField } from "../common/TextField";
 import EmojiPicker from "../common/EmojiPicker";
 import ColorPicker from "../common/ColorPicker";
+import { Button } from "../common/Button";
 
 interface AddTodoProps {
   onAdd: (todo: Todo) => void;
@@ -72,12 +73,19 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
         />
       </div>
 
-      <input
-        type="time"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-        className="w-full p-2 border rounded"
-      />
+      <div className="flex gap-2">
+        <input
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          className="w-full p-2 border rounded"
+        />
+        <Button
+          text="추가"
+          className="bg-[#94bc77] text-white"
+          onClick={(e) => handleSubmit(e as unknown as React.FormEvent)}
+        />
+      </div>
       {/* <TextField
         value={withWho}
         onChange={(e) => setWithWho(e.target.value)}
