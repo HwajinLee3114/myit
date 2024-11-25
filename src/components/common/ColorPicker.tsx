@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { colorList } from "../../data/color";
+import clsx from "clsx";
 
 interface ColorPickerProps {
   value: string;
@@ -22,10 +23,14 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ value, onChange }) => {
     <div className="relative inline-block w-fit">
       <button
         onClick={toggleColorPicker}
-        className={`w-15 h-15 h-full rounded-full px-3 py-2 border-dotted border-4 bg-${value} ${
-          value ? `border-${value}` : ""
-        }
-        `}
+        style={{ backgroundColor: value, borderColor: value }}
+        className={clsx(
+          "w-15 h-15 h-full rounded-full px-3 py-2 border-dotted border-4"
+          // {
+          //   [`bg-${value}`]: value,
+          //   [`border-red`]: value,
+          // }
+        )}
       ></button>
 
       {isPickerOpen && (
@@ -35,7 +40,8 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ value, onChange }) => {
               <button
                 key={index}
                 onClick={() => handleColorClick(color)}
-                className={`bg-${color} w-full h-5`}
+                className={`w-full h-6`}
+                style={{ backgroundColor: color }}
               ></button>
             ))}
           </div>

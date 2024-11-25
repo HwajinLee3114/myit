@@ -14,7 +14,7 @@ export const TodoPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 text-center">
+    <div className="flex flex-col gap-3 text-center items-center">
       <h1 className="text-2xl font-bold mb-4">{today.toLocaleDateString()}</h1>
       <AddTodo onAdd={handleAddTodo} />
       <TodoList todos={todos} />
