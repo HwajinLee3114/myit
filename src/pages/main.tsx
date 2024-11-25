@@ -3,7 +3,7 @@ import { PostItButton } from "../components/common/PostItButton";
 
 export const MainPage = () => {
   return (
-    <div className="flex flex-col justify-center max-w-full h-full text-center">
+    <div className="flex flex-col justify-center items-center text-center">
       <h1 className="text-2xl font-bold mb-4">✏️ 오늘의 생성</h1>
 
       <div className="flex gap-3 mx-auto my-0">
