@@ -4,6 +4,7 @@ import { TextField } from "../common/TextField";
 import EmojiPicker from "../common/EmojiPicker";
 import ColorPicker from "../common/ColorPicker";
 import { Button } from "../common/Button";
+import { DatePicker } from "../common/DatePicker";
 
 interface AddTodoProps {
   onAdd: (todo: Todo) => void;
@@ -13,7 +14,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   const [task, setTask] = useState("");
   const [emoji, setEmoji] = useState("");
   const [time, setTime] = useState("");
-  const [bgColor, setBgColor] = useState("bg-white");
+  const [bgColor, setBgColor] = useState("");
   // const [withWho, setWithWho] = useState("");
   // const [loc, setLoc] = useState("");
 
@@ -21,6 +22,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
 
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
+  const today = new Date();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +49,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
     setTime("");
     // setWithWho("");
     // setLoc("");
-    setBgColor("bg-white");
+    colorChangeHandler("");
   };
 
   const emojiChangeHandler = (changeEmoji: string): void => {
@@ -83,6 +85,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
 
   return (
     <div className="space-y-4 p-4 border rounded-lg shadow-md w-full sm:w-96">
+      {/* <DatePicker value={today.toLocaleDateString()} onChange={() => {}} /> */}
       <div className="flex gap-2">
         <div ref={emojiPickerRef}>
           <EmojiPicker
