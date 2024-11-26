@@ -5,21 +5,21 @@ import EmojiPicker from "../common/EmojiPicker";
 import ColorPicker from "../common/ColorPicker";
 import { Button } from "../common/Button";
 import { DatePicker } from "../common/DatePicker";
+import useTodoStore from "../../store/todoStore";
 
-interface AddTodoProps {
-  onAdd: (todo: Todo) => void;
-}
-
-const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
+const AddTodo: React.FC = () => {
   const [task, setTask] = useState("");
   const [emoji, setEmoji] = useState("");
   const [time, setTime] = useState("");
   const [bgColor, setBgColor] = useState("");
+  const [date, setDate] = useState("");
   // const [withWho, setWithWho] = useState("");
   // const [loc, setLoc] = useState("");
 
   const [emojiPickerOpen, setEmojiPickerOpen] = useState<boolean>(false);
   const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
+
+  const { addTodo } = useTodoStore();
 
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
   const today = new Date();
@@ -27,13 +27,14 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newTodo: Todo = {
-      id: Math.random(),
+      id: 0,
       task,
       emoji,
       time,
       // withWho,
       // loc,
       bgColor,
+      date,
     };
 
     if (!newTodo.task) {
@@ -43,10 +44,11 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
 
     console.info(newTodo);
 
-    onAdd(newTodo);
+    addTodo(newTodo);
     setTask("");
     setEmoji("");
     setTime("");
+    setDate("");
     // setWithWho("");
     // setLoc("");
     colorChangeHandler("");
@@ -85,7 +87,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
 
   return (
     <div className="space-y-4 p-4 border rounded-lg shadow-md w-full sm:w-96">
-      {/* <DatePicker value={today.toLocaleDateString()} onChange={() => {}} /> */}
+      <DatePicker value={today.toLocaleDateString()} onChange={setDate} />
       <div className="flex gap-2">
         <div ref={emojiPickerRef}>
           <EmojiPicker
