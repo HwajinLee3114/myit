@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { emojiList } from "../../data/emoji";
 
 interface EmojiPickerProps {
   value: string;
   onChange: (value: string) => void;
+  emojiPickerOpen: boolean;
+  setEmojiPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EmojiPicker: React.FC<EmojiPickerProps> = ({ value, onChange }) => {
+const EmojiPicker: React.FC<EmojiPickerProps> = ({
+  value,
+  onChange,
+  emojiPickerOpen,
+  setEmojiPickerOpen,
+}) => {
   const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
 
   const handleEmojiClick = (emoji: string): void => {
     onChange(emoji);
-    setIsPickerOpen(false);
+    setEmojiPickerOpen(false);
   };
 
   const toggleEmojiPicker = (): void => {
-    setIsPickerOpen((prev) => !prev);
+    setEmojiPickerOpen((prev) => !prev);
   };
 
   return (
@@ -27,7 +34,7 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ value, onChange }) => {
         {value ? value : "✚"}
       </button>
 
-      {isPickerOpen && (
+      {emojiPickerOpen && (
         <div className="absolute mt-2 bg-white border rounded shadow-lg p-2">
           <div className="grid grid-cols-5 gap-2 w-[170px]">
             {emojiList.map((emoji, index) => (

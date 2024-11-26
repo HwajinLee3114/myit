@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Todo } from "../../types/todo";
 import { TextField } from "../common/TextField";
 import EmojiPicker from "../common/EmojiPicker";
@@ -16,6 +16,11 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
   const [bgColor, setBgColor] = useState("bg-white");
   // const [withWho, setWithWho] = useState("");
   // const [loc, setLoc] = useState("");
+
+  const [emojiPickerOpen, setEmojiPickerOpen] = useState<boolean>(false);
+  const [colorPickerOpen, setColorPickerOpen] = useState<boolean>(false);
+
+  const emojiPickerRef = useRef<HTMLDivElement | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,10 +64,34 @@ const AddTodo: React.FC<AddTodoProps> = ({ onAdd }) => {
     }
   };
 
+  useEffect(() => {
+    const clickOutSideHandler = (e: MouseEvent) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(e.target as Node)
+      ) {
+        setEmojiPickerOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutSideHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", clickOutSideHandler);
+    };
+  }, []);
+
   return (
     <div className="space-y-4 p-4 border rounded-lg shadow-md w-full sm:w-96">
       <div className="flex gap-2">
-        <EmojiPicker value={emoji} onChange={emojiChangeHandler} />
+        <div ref={emojiPickerRef}>
+          <EmojiPicker
+            value={emoji}
+            onChange={emojiChangeHandler}
+            emojiPickerOpen={emojiPickerOpen}
+            setEmojiPickerOpen={setEmojiPickerOpen}
+          />
+        </div>
         <ColorPicker value={bgColor} onChange={colorChangeHandler} />
 
         <TextField
