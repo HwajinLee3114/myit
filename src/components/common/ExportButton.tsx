@@ -10,7 +10,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({ targetId }) => {
   const handleExport = () => {
     const element = document.getElementById(targetId);
     if (element) {
-      const fixedWidth = 350;
+      const fixedWidth = 385;
 
       html2canvas(element, {
         width: fixedWidth,

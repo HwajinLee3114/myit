@@ -11,7 +11,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       className={`flex gap-3 p-2 my-1 rounded-lg items-center`}
       style={{ backgroundColor: todo.bgColor }}
     >
-      <span className="text-xl">{todo.emoji}</span>
+      <div className="text-xl">{todo.emoji}</div>
       <div className="flex gap-2 w-full justify-between items-center">
         <div className="text-md break-words max-w-[250px] text-left">
           {todo.task}
